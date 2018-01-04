@@ -1,10 +1,37 @@
 'use strict';
 
-module.exports.index = (event, context, callback) => {
-  let response = {
+module.exports.hello = (event, context, callback) => {
+  const response = {
     statusCode: 200,
-    body: JSON.stringify({ hello: 'abestado'})
+    body: JSON.stringify({ 
+      message: 'Deu certo, abestado',
+      // input: event,
+    }),        
   };
 
-  context.succeed(response);
+  callback(null, response);
+};
+
+module.exports.push = (event, context, callback) => {
+  let title = event.pathParameters.title;
+  const response = {
+    statusCode: 300,
+    body: JSON.stringify({
+      message: `o título é ${title}`,
+    }),
+  };
+
+  callback(null, response);
+};
+
+module.exports.ramza = (event, context, callback) => {
+  const response = {
+    statusCode: 200,
+    body: JSON.stringify({ 
+      message: 'Meu nome é Ramza',
+      // input: event,
+    }),        
+  };
+
+  callback(null, response);
 };
