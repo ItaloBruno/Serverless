@@ -35,3 +35,28 @@ module.exports.ramza = (event, context, callback) => {
 
   callback(null, response);
 };
+
+const cep = require('cep-promise');
+
+module.exports.encontrarCEP = (event, context, callback)=>{
+  let body;
+  let statusCode;
+  let cepCode = event.pathParameters.cep;
+
+  cep(cepCode)
+    .then((result) => {
+      statusCode = 200;
+      body = result;
+    })
+    .catch((error) => {
+      statusCode = 400;
+      body = error;
+    })
+    .then(() => {
+      let resposta = {
+        statusCode: statusCode,
+        body: JSON.stringify(body)
+      }
+      callback(null, resposta);
+    });    
+};

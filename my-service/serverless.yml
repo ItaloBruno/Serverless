@@ -28,3 +28,11 @@ functions:
       - http:
           method: get
           path: ramza
+
+  encontrarCEP:
+    handler: handler.encontrarCEP
+    events:
+      - http:
+          method: get
+          path: cep/{cep}
+          cors: true
